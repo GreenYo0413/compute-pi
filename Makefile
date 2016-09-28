@@ -31,5 +31,13 @@ gencsv: default
 		./benchmark_clock_gettime $$i; \
 	done > result_clock_gettime.csv	
 
+plot: default
+	{ /usr/bin/time -f 'baseline %S %U' ./time_test_baseline ; } 2> time.txt
+	{ /usr/bin/time -f 'openmp_2 %S %U' ./time_test_openmp_2 ; } 2>> time.txt
+	{ /usr/bin/time -f 'openmp_4 %S %U' ./time_test_openmp_4 ; } 2>> time.txt
+	{ /usr/bin/time -f 'avx %S %U' ./time_test_avx ; } 2>> time.txt
+	{ /usr/bin/time -f 'avxunroll %S %U' ./time_test_avxunroll ; } 2>> time.txt
+	gnuplot runtime.gp
+
 clean:
-	rm -f $(EXECUTABLE) *.o *.s result_clock_gettime.csv
+	rm -f $(EXECUTABLE) *.o *.s result_clock_gettime.csv runtime.png time.txt
