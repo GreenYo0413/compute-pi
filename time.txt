@@ -1,0 +1,5 @@
+baseline 0.00 4.87
+openmp_2 0.00 4.90
+openmp_4 0.00 5.26
+avx 0.00 1.59
+avxunroll 0.00 1.71
